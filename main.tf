@@ -1,13 +1,12 @@
-resource "kubernetes-namespace" "example" {
+resource "kubernetes_namespace" "example" {
   metadata {
     name = var.namespace
     annotations = var.annotations
-
     labels = var.labels
   }
 }
 
-resource "kubernetes_resource_quota" "example" {
+resource "kubernetes_resource_quota" "podlimit" {
   metadata {
     name = "podlimit"
     namespace = var.namespace
@@ -19,8 +18,6 @@ resource "kubernetes_resource_quota" "example" {
     scopes = ["BestEffort"]
   }
 }
-
-
 
 resource "kubernetes_limit_range" "example" {
   metadata {
@@ -44,4 +41,3 @@ resource "kubernetes_limit_range" "example" {
     }
   }
 }
-
